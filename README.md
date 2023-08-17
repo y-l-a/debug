@@ -41,7 +41,9 @@ set(CMAKE_BUILD_TYPE DEBUG)
 ```
 - task.json:是把cpp文件编译成了一个可执行文件
   - label：与launch.json的preLaunchTask要对应，即编译生成的可执行文件的标签
-  - command：选择cmake就好！，args空着就行; cd ./build ;cmake .. ;make，这样可以在build文件夹下编译，否则中间文件都在主文件夹了很乱
+  - command：选择cmake就好！，args空着就行;
+    - cd ./build ;cmake .. ;make;这样可以在build文件夹下编译，否则中间文件都在主文件夹了很乱
+    - cmake 好像也不乱
   - type：选择shell
   - 生成：点击菜单栏的终端，再选择配置任务就可(重点！！！！点终端之前，一定要先选中一个cpp文件！！，否则无法生成task)，再选择C/C++：g++生成活动文件即可
 ```
