@@ -41,19 +41,40 @@ set(CMAKE_BUILD_TYPE DEBUG)
 ```
 - task.json:是把cpp文件编译成了一个可执行文件
   - label：与launch.json的preLaunchTask要对应，即编译生成的可执行文件的标签
-  - command：选择cmake就好！，args空着就行
+  - command：选择cmake就好！，args空着就行; cd ./build ;cmake .. ;make，这样可以在build文件夹下编译，否则中间文件都在主文件夹了很乱
+  - type：选择shell
   - 生成：点击菜单栏的终端，再选择配置任务就可(重点！！！！点终端之前，一定要先选中一个cpp文件！！，否则无法生成task)，再选择C/C++：g++生成活动文件即可
 ```
+1.
 {
     //这几个综合来说就是把一个.cpp文件编译成了一个可执行文件 .exe
     "tasks": [
         {
-            "type": "cppbuild",
+            "type": "shell",
+            "label": "dd", //对应launch.json中的 "preLaunchTask"；
+                                              //（一定要一致，决定了launch.json之前先运行哪个配置，tasks是一个array类型，里面理论来说可以存多个配置，即多个label）
+            "command": "cd ./build ;cmake .. ;make",//编译器的命令，相当于选择了哪个编译器 通过cmake编译
+            "args": [ //跟在编译器命令后面 command后面 因为cmake不需要其他命令，所以直接cmake，因为和cmakelists在同一文件夹下
+            // "-fdiagnostics-color=always",
+                // "-g",
+                // "${workspaceFolder}/*.cc",
+                // "-o",
+                // "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+        }
+    ],
+    "version": "2.0.0"
+}
+2.
+{
+    //这几个综合来说就是把一个.cpp文件编译成了一个可执行文件 .exe
+    "tasks": [
+        {
+            "type": "shell",
             "label": "dd", //对应launch.json中的 "preLaunchTask"；
                                               //（一定要一致，决定了launch.json之前先运行哪个配置，tasks是一个array类型，里面理论来说可以存多个配置，即多个label）
             "command": "cmake",//编译器的命令，相当于选择了哪个编译器 通过cmake编译
             "args": [ //跟在编译器命令后面 command后面 因为cmake不需要其他命令，所以直接cmake，因为和cmakelists在同一文件夹下
-                //底下这些是使用g++编译时需要的，我们采用cmake编译，只要写好cmakelists文件就好
                 // "-fdiagnostics-color=always",
                 // "-g",
                 // "${workspaceFolder}/*.cc",
