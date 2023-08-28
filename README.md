@@ -14,6 +14,13 @@
 
 ## vscode debug
 首先要在cmakelists中设置模式为debug模式，debug模式影响性能，调试结束后关闭
+**注：若debug时，断点为灰色，且断点处显示module containing this breakpoint has not yet loaded 
+#or thebreakpoint address could not be obtained 是因为没有编译成debug版本 要**
+```
+SET(CMAKE_BUILD_TYPE Debug)
+add_definitions("-Wall -g")
+```
+**并且有时候若开始调试时，忘了设置这两个，则再继续调试，可能cmakelists的改动不会立即生效，可以重新编译一下，再debug**
 ```
 set(CMAKE_BUILD_TYPE DEBUG)
 ```
@@ -92,7 +99,7 @@ set(CMAKE_BUILD_TYPE DEBUG)
 - launch.json:负责debug的文件，需要设置program为待调试的可执行文件，且需要添加"preLaunchTask":与task的label相对应
   - preLaunchTask：由task编译生成的可执行文件名，这个名字必须与task.json的label一致
   - program：要调试的可执行文件名
-  - 生成：launch.json在左侧菜单栏选择运行与调试，生成launch.json文件即可（同样，点菜单的运行与调试之前，一定要先选中一个cpp文件！！，否则无法生成launch）
+  - 生成：launch.json在左侧菜单栏选择运行与调试，生成launch.json文件即可（同样，点菜单的运行与调试之前，一定要先选中一个cpp文件！！，否则无法生成launch）,再在配置中选择c++ /g++
 ```
 {
     // 使用 IntelliSense 了解相关属性。 
@@ -126,8 +133,10 @@ set(CMAKE_BUILD_TYPE DEBUG)
             ],
            ** "preLaunchTask": "dd"** //意思就是在launch之前运行的任务名，这个名字必须与task.json的label一致
         }
-
-
     ]
 }
 ```
+
+### 针对ros launch文件的debug
+- task.json: 生成：点击菜单栏的终端，再选择配置任务就可(重点！！！！点终端之前，一定要先选中一个cpp文件！！，否则无法生成task)，再选择catkin_make:build生成活动文件即可
+- launch.json:launch.json在左侧菜单栏选择运行与调试，生成launch.json文件即可（同样，点菜单的运行与调试之前，一定要先选中一个cpp文件！！，否则无法生成launch），再在配置中搜索选择ros launch(attach是单个节点的调试)
