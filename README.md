@@ -11,6 +11,8 @@
 7.core-file core
 8.where
 ```
+VSCode没有.vscode目录[问题解决(亲测有效,适用windows\ubuntu)]
+打开vscode->运行->添加配置
 
 ## vscode debug
 首先要在cmakelists中设置模式为debug模式，debug模式影响性能，调试结束后关闭
