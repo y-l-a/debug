@@ -140,3 +140,44 @@ set(CMAKE_BUILD_TYPE DEBUG)
 ### 针对ros launch文件的debug
 - task.json: 生成：点击菜单栏的终端，再选择配置任务就可(重点！！！！点终端之前，一定要先选中一个cpp文件！！，否则无法生成task)，再选择catkin_make:build生成活动文件即可
 - launch.json:launch.json在左侧菜单栏选择运行与调试，生成launch.json文件即可（同样，点菜单的运行与调试之前，一定要先选中一个cpp文件！！，否则无法生成launch），再在配置中搜索选择ros launch(attach是单个节点的调试)
+
+launch.json
+```
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "ROS: Launch",
+            "type": "ros",
+            "request": "launch",
+            "target": "/home/yla/dongfeng/ground/src/efficient_online_segmentation/launch/efficient_online_segmentation.launch"
+        }
+
+    ]
+}
+```
+task.json
+```
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "catkin_make",
+			"args": [
+				// "--directory",
+				// "/home/yla/dongfeng/ground",
+				// "-DCMAKE_BUILD_TYPE=RelWithDebInfo"
+			],
+			"problemMatcher": [
+				"$catkin-gcc"
+			],
+			"group": "build",
+			"label": "catkin_make: build"
+		}
+	]
+}
+
+```
