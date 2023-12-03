@@ -65,7 +65,7 @@ set(CMAKE_BUILD_TYPE DEBUG)
             "label": "dd", //对应launch.json中的 "preLaunchTask"；
                                               //（一定要一致，决定了launch.json之前先运行哪个配置，tasks是一个array类型，里面理论来说可以存多个配置，即多个label）
             "command": "cd ./build ;cmake .. ;make",//编译器的命令，相当于选择了哪个编译器 通过cmake编译
-            "args": [ //跟在编译器命令后面 command后面 因为cmake不需要其他命令，所以直接cmake，因为和cmakelists在同一文件夹下
+            "args": [ //跟在编译器命令后面，就是终端输入的参数！！！ command后面 因为cmake不需要其他命令，所以直接cmake，因为和cmakelists在同一文件夹下
             // "-fdiagnostics-color=always",
                 // "-g",
                 // "${workspaceFolder}/*.cc",
@@ -114,8 +114,10 @@ set(CMAKE_BUILD_TYPE DEBUG)
             "name": "(gdb) 启动",
             "type": "cppdbg",
             "request": "launch",
-           ** "program": "${workspaceFolder}/build/binaryKMeans"**, //要调试的可执行文件名
-            "args": [],
+            "program": "${workspaceFolder}/build/erasor_run", //要调试的可执行文件名
+            "args": ["/home/yla/data1/mapping/own/0711",  //就是可执行文件后的参数，终端参数输入处
+                    "/home/yla/lifelong/ERASOR/config/seq_00.yaml",
+                     "-1"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
@@ -133,7 +135,7 @@ set(CMAKE_BUILD_TYPE DEBUG)
                     "ignoreFailures": true
                 }
             ],
-           ** "preLaunchTask": "dd"** //意思就是在launch之前运行的任务名，这个名字必须与task.json的label一致
+            "preLaunchTask": "dd" //意思就是在launch之前运行的任务名，这个名字必须与task.json的label一致
         }
     ]
 }
